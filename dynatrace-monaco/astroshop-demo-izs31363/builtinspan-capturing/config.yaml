@@ -1,0 +1,11 @@
+configs:
+- id: 74e224b4-ca21-3f23-8364-56dba991ef91
+  config:
+    template: 74e224b4-ca21-3f23-8364-56dba991ef91.json
+    skip: false
+    originObjectId: vu9U3hXa3q0AAAABABZidWlsdGluOnNwYW4tY2FwdHVyaW5nAAZ0ZW5hbnQABnRlbmFudAAkOTYzYTgxNTMtZmZiMy0zM2E5LWJhOWMtYTNjYzIzODNlNzVhvu9U3hXa3q0
+  type:
+    settings:
+      schema: builtin:span-capturing
+      schemaVersion: 0.1.15
+      scope: environment

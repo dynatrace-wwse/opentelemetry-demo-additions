@@ -1,0 +1,44 @@
+default:
+  envOverrides:
+    - name: OTEL_COLLECTOR_NAME
+      value: dynatrace-otel-gateway-collector
+    # - name: PUBLIC_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+    #   value: https://otel-demo-collector.example.com/v1/traces
+
+# components:
+#   frontend:
+#     envOverrides:
+#       - name: PUBLIC_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+#         value: https://otel-demo-collector.example.com/v1/traces
+
+#   frontendProxy:
+#     service:
+#         type: LoadBalancer
+#     ingress:
+#       enabled: true
+#       hosts:
+#         - host: otel-demo.example.com
+#           paths:
+#             - path: /
+#               pathType: Prefix
+#               port: 8080
+              
+opentelemetry-collector:
+  enabled: false
+  # ingress:
+  #   enabled: true
+  #   hosts:
+  #     - host: otel-demo-collector.example.com
+  #       paths:
+  #         - path: /
+  #           pathType: Prefix
+  #           port: 4318
+
+jaeger:
+  enabled: false
+
+prometheus:
+  enabled: false
+
+grafana:
+  enabled: false

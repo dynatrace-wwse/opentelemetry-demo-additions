@@ -1,0 +1,455 @@
+apiVersion: v1
+kind: ServiceAccount     
+metadata:
+  name: astroshop-flagd-config-updater
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: astroshop-flagd-config-updater
+rules:
+- apiGroups:
+  - ""
+  resourceNames:
+  - astroshop-flagd-config
+  resources:
+  - configmaps
+  verbs:
+  - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: astroshop-flagd-config-updater-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: astroshop-flagd-config-updater
+subjects:
+- kind: ServiceAccount
+  name: astroshop-flagd-config-updater
+  namespace: astroshop
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name:  astroshop-flagd-config-script
+data:
+  start_product_catalog_failure.sh: |
+    #!/bin/bash
+    apk --update add curl
+    TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+    curl -k -X PATCH --data '{"data":{"demo.flagd.json":"{\n  \"$schema\": \"https://flagd.dev/schema/v0/flags.json\",\n  \"flags\": {\n    \"productCatalogFailure\": {\n      \"description\": \"Fail product catalog service on a specific product\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"on\"\n    },\n    \"recommendationServiceCacheFailure\": {\n      \"description\": \"Fail recommendation service cache\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceManualGc\": {\n      \"description\": \"Triggers full manual garbage collections in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceHighCpu\": {\n      \"description\": \"Triggers high cpu load in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceFailure\": {\n      \"description\": \"Fail ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"kafkaQueueProblems\": {\n      \"description\": \"Overloads Kafka queue while simultaneously introducing a consumer side delay leading to a lag spike\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"cartServiceFailure\": {\n      \"description\": \"Fail cart service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceFailure\": {\n      \"description\": \"Fail payment service charge requests\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceUnreachable\": {\n      \"description\": \"Payment service is unavailable\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"loadgeneratorFloodHomepage\": {\n      \"description\": \"Flood the frontend with a large amount of requests.\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"imageSlowLoad\": {\n      \"description\": \"slow loading images in the frontend\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"10sec\": 10000,\n        \"5sec\": 5000,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    }\n  }\n}\n"}}' -H "Content-Type: application/strategic-merge-patch+json" -H "Authorization: bearer $TOKEN" "https://kubernetes.default/api/v1/namespaces/astroshop/configmaps/astroshop-flagd-config"
+  start_recommendation_service_cache_failure.sh: |
+    #!/bin/bash
+    apk --update add curl
+    TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+    curl -k -X PATCH --data '{"data":{"demo.flagd.json":"{\n  \"$schema\": \"https://flagd.dev/schema/v0/flags.json\",\n  \"flags\": {\n    \"productCatalogFailure\": {\n      \"description\": \"Fail product catalog service on a specific product\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"recommendationServiceCacheFailure\": {\n      \"description\": \"Fail recommendation service cache\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"on\"\n    },\n    \"adServiceManualGc\": {\n      \"description\": \"Triggers full manual garbage collections in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceHighCpu\": {\n      \"description\": \"Triggers high cpu load in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceFailure\": {\n      \"description\": \"Fail ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"kafkaQueueProblems\": {\n      \"description\": \"Overloads Kafka queue while simultaneously introducing a consumer side delay leading to a lag spike\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"cartServiceFailure\": {\n      \"description\": \"Fail cart service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceFailure\": {\n      \"description\": \"Fail payment service charge requests\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceUnreachable\": {\n      \"description\": \"Payment service is unavailable\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"loadgeneratorFloodHomepage\": {\n      \"description\": \"Flood the frontend with a large amount of requests.\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"imageSlowLoad\": {\n      \"description\": \"slow loading images in the frontend\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"10sec\": 10000,\n        \"5sec\": 5000,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    }\n  }\n}\n"}}' -H "Content-Type: application/strategic-merge-patch+json" -H "Authorization: bearer $TOKEN" "https://kubernetes.default/api/v1/namespaces/astroshop/configmaps/astroshop-flagd-config"
+  start_adservice_manualgc.sh: |
+    #!/bin/bash
+    apk --update add curl
+    TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+    curl -k -X PATCH --data '{"data":{"demo.flagd.json":"{\n  \"$schema\": \"https://flagd.dev/schema/v0/flags.json\",\n  \"flags\": {\n    \"productCatalogFailure\": {\n      \"description\": \"Fail product catalog service on a specific product\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"recommendationServiceCacheFailure\": {\n      \"description\": \"Fail recommendation service cache\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceManualGc\": {\n      \"description\": \"Triggers full manual garbage collections in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"on\"\n    },\n    \"adServiceHighCpu\": {\n      \"description\": \"Triggers high cpu load in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceFailure\": {\n      \"description\": \"Fail ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"kafkaQueueProblems\": {\n      \"description\": \"Overloads Kafka queue while simultaneously introducing a consumer side delay leading to a lag spike\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"cartServiceFailure\": {\n      \"description\": \"Fail cart service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceFailure\": {\n      \"description\": \"Fail payment service charge requests\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceUnreachable\": {\n      \"description\": \"Payment service is unavailable\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"loadgeneratorFloodHomepage\": {\n      \"description\": \"Flood the frontend with a large amount of requests.\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"imageSlowLoad\": {\n      \"description\": \"slow loading images in the frontend\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"10sec\": 10000,\n        \"5sec\": 5000,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    }\n  }\n}\n"}}' -H "Content-Type: application/strategic-merge-patch+json" -H "Authorization: bearer $TOKEN" "https://kubernetes.default/api/v1/namespaces/astroshop/configmaps/astroshop-flagd-config"
+  start_adservice_highcpu.sh: |
+    #!/bin/bash
+    apk --update add curl
+    TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+    curl -k -X PATCH --data '{"data":{"demo.flagd.json":"{\n  \"$schema\": \"https://flagd.dev/schema/v0/flags.json\",\n  \"flags\": {\n    \"productCatalogFailure\": {\n      \"description\": \"Fail product catalog service on a specific product\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"recommendationServiceCacheFailure\": {\n      \"description\": \"Fail recommendation service cache\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceManualGc\": {\n      \"description\": \"Triggers full manual garbage collections in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceHighCpu\": {\n      \"description\": \"Triggers high cpu load in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"on\"\n    },\n    \"adServiceFailure\": {\n      \"description\": \"Fail ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"kafkaQueueProblems\": {\n      \"description\": \"Overloads Kafka queue while simultaneously introducing a consumer side delay leading to a lag spike\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"cartServiceFailure\": {\n      \"description\": \"Fail cart service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceFailure\": {\n      \"description\": \"Fail payment service charge requests\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceUnreachable\": {\n      \"description\": \"Payment service is unavailable\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"loadgeneratorFloodHomepage\": {\n      \"description\": \"Flood the frontend with a large amount of requests.\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"imageSlowLoad\": {\n      \"description\": \"slow loading images in the frontend\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"10sec\": 10000,\n        \"5sec\": 5000,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    }\n  }\n}\n"}}' -H "Content-Type: application/strategic-merge-patch+json" -H "Authorization: bearer $TOKEN" "https://kubernetes.default/api/v1/namespaces/astroshop/configmaps/astroshop-flagd-config"
+  start_adservice_failure.sh: |
+    #!/bin/bash
+    apk --update add curl
+    TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+    curl -k -X PATCH --data '{"data":{"demo.flagd.json":"{\n  \"$schema\": \"https://flagd.dev/schema/v0/flags.json\",\n  \"flags\": {\n    \"productCatalogFailure\": {\n      \"description\": \"Fail product catalog service on a specific product\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"recommendationServiceCacheFailure\": {\n      \"description\": \"Fail recommendation service cache\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceManualGc\": {\n      \"description\": \"Triggers full manual garbage collections in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceHighCpu\": {\n      \"description\": \"Triggers high cpu load in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceFailure\": {\n      \"description\": \"Fail ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"on\"\n    },\n    \"kafkaQueueProblems\": {\n      \"description\": \"Overloads Kafka queue while simultaneously introducing a consumer side delay leading to a lag spike\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"cartServiceFailure\": {\n      \"description\": \"Fail cart service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceFailure\": {\n      \"description\": \"Fail payment service charge requests\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceUnreachable\": {\n      \"description\": \"Payment service is unavailable\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"loadgeneratorFloodHomepage\": {\n      \"description\": \"Flood the frontend with a large amount of requests.\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"imageSlowLoad\": {\n      \"description\": \"slow loading images in the frontend\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"10sec\": 10000,\n        \"5sec\": 5000,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    }\n  }\n}\n"}}' -H "Content-Type: application/strategic-merge-patch+json" -H "Authorization: bearer $TOKEN" "https://kubernetes.default/api/v1/namespaces/astroshop/configmaps/astroshop-flagd-config"
+  start_kafka_queue_problems.sh: |
+    #!/bin/bash
+    apk --update add curl
+    TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+    curl -k -X PATCH --data '{"data":{"demo.flagd.json":"{\n  \"$schema\": \"https://flagd.dev/schema/v0/flags.json\",\n  \"flags\": {\n    \"productCatalogFailure\": {\n      \"description\": \"Fail product catalog service on a specific product\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"recommendationServiceCacheFailure\": {\n      \"description\": \"Fail recommendation service cache\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceManualGc\": {\n      \"description\": \"Triggers full manual garbage collections in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceHighCpu\": {\n      \"description\": \"Triggers high cpu load in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceFailure\": {\n      \"description\": \"Fail ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"kafkaQueueProblems\": {\n      \"description\": \"Overloads Kafka queue while simultaneously introducing a consumer side delay leading to a lag spike\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"on\"\n    },\n    \"cartServiceFailure\": {\n      \"description\": \"Fail cart service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceFailure\": {\n      \"description\": \"Fail payment service charge requests\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceUnreachable\": {\n      \"description\": \"Payment service is unavailable\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"loadgeneratorFloodHomepage\": {\n      \"description\": \"Flood the frontend with a large amount of requests.\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"imageSlowLoad\": {\n      \"description\": \"slow loading images in the frontend\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"10sec\": 10000,\n        \"5sec\": 5000,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    }\n  }\n}\n"}}' -H "Content-Type: application/strategic-merge-patch+json" -H "Authorization: bearer $TOKEN" "https://kubernetes.default/api/v1/namespaces/astroshop/configmaps/astroshop-flagd-config"
+  start_cartservice_failure.sh: |
+    #!/bin/bash
+    apk --update add curl
+    TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+    curl -k -X PATCH --data '{"data":{"demo.flagd.json":"{\n  \"$schema\": \"https://flagd.dev/schema/v0/flags.json\",\n  \"flags\": {\n    \"productCatalogFailure\": {\n      \"description\": \"Fail product catalog service on a specific product\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"recommendationServiceCacheFailure\": {\n      \"description\": \"Fail recommendation service cache\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceManualGc\": {\n      \"description\": \"Triggers full manual garbage collections in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceHighCpu\": {\n      \"description\": \"Triggers high cpu load in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceFailure\": {\n      \"description\": \"Fail ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"kafkaQueueProblems\": {\n      \"description\": \"Overloads Kafka queue while simultaneously introducing a consumer side delay leading to a lag spike\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"cartServiceFailure\": {\n      \"description\": \"Fail cart service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"on\"\n    },\n    \"paymentServiceFailure\": {\n      \"description\": \"Fail payment service charge requests\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceUnreachable\": {\n      \"description\": \"Payment service is unavailable\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"loadgeneratorFloodHomepage\": {\n      \"description\": \"Flood the frontend with a large amount of requests.\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"imageSlowLoad\": {\n      \"description\": \"slow loading images in the frontend\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"10sec\": 10000,\n        \"5sec\": 5000,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    }\n  }\n}\n"}}' -H "Content-Type: application/strategic-merge-patch+json" -H "Authorization: bearer $TOKEN" "https://kubernetes.default/api/v1/namespaces/astroshop/configmaps/astroshop-flagd-config"
+  start_payment_unreachable.sh: |
+    #!/bin/bash
+    apk --update add curl
+    TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+    curl -k -X PATCH --data '{"data":{"demo.flagd.json":"{\n  \"$schema\": \"https://flagd.dev/schema/v0/flags.json\",\n  \"flags\": {\n    \"productCatalogFailure\": {\n      \"description\": \"Fail product catalog service on a specific product\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"recommendationServiceCacheFailure\": {\n      \"description\": \"Fail recommendation service cache\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceManualGc\": {\n      \"description\": \"Triggers full manual garbage collections in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceHighCpu\": {\n      \"description\": \"Triggers high cpu load in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceFailure\": {\n      \"description\": \"Fail ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"kafkaQueueProblems\": {\n      \"description\": \"Overloads Kafka queue while simultaneously introducing a consumer side delay leading to a lag spike\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"cartServiceFailure\": {\n      \"description\": \"Fail cart service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceFailure\": {\n      \"description\": \"Fail payment service charge requests\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"on\"\n    },\n    \"paymentServiceUnreachable\": {\n      \"description\": \"Payment service is unavailable\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"loadgeneratorFloodHomepage\": {\n      \"description\": \"Flood the frontend with a large amount of requests.\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"imageSlowLoad\": {\n      \"description\": \"slow loading images in the frontend\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"10sec\": 10000,\n        \"5sec\": 5000,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    }\n  }\n}\n"}}' -H "Content-Type: application/strategic-merge-patch+json" -H "Authorization: bearer $TOKEN" "https://kubernetes.default/api/v1/namespaces/astroshop/configmaps/astroshop-flagd-config"
+  start_loadgenerator_flood.sh: |
+    #!/bin/bash
+    apk --update add curl
+    TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+    curl -k -X PATCH --data '{"data":{"demo.flagd.json":"{\n  \"$schema\": \"https://flagd.dev/schema/v0/flags.json\",\n  \"flags\": {\n    \"productCatalogFailure\": {\n      \"description\": \"Fail product catalog service on a specific product\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"recommendationServiceCacheFailure\": {\n      \"description\": \"Fail recommendation service cache\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceManualGc\": {\n      \"description\": \"Triggers full manual garbage collections in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceHighCpu\": {\n      \"description\": \"Triggers high cpu load in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceFailure\": {\n      \"description\": \"Fail ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"kafkaQueueProblems\": {\n      \"description\": \"Overloads Kafka queue while simultaneously introducing a consumer side delay leading to a lag spike\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"cartServiceFailure\": {\n      \"description\": \"Fail cart service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceFailure\": {\n      \"description\": \"Fail payment service charge requests\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceUnreachable\": {\n      \"description\": \"Payment service is unavailable\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"loadgeneratorFloodHomepage\": {\n      \"description\": \"Flood the frontend with a large amount of requests.\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"on\"\n    },\n    \"imageSlowLoad\": {\n      \"description\": \"slow loading images in the frontend\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"10sec\": 10000,\n        \"5sec\": 5000,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    }\n  }\n}\n"}}' -H "Content-Type: application/strategic-merge-patch+json" -H "Authorization: bearer $TOKEN" "https://kubernetes.default/api/v1/namespaces/astroshop/configmaps/astroshop-flagd-config"
+  start_image_slowload.sh: |
+    #!/bin/bash
+    apk --update add curl
+    TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+    curl -k -X PATCH --data '{"data":{"demo.flagd.json":"{\n  \"$schema\": \"https://flagd.dev/schema/v0/flags.json\",\n  \"flags\": {\n    \"productCatalogFailure\": {\n      \"description\": \"Fail product catalog service on a specific product\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"recommendationServiceCacheFailure\": {\n      \"description\": \"Fail recommendation service cache\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceManualGc\": {\n      \"description\": \"Triggers full manual garbage collections in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceHighCpu\": {\n      \"description\": \"Triggers high cpu load in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceFailure\": {\n      \"description\": \"Fail ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"kafkaQueueProblems\": {\n      \"description\": \"Overloads Kafka queue while simultaneously introducing a consumer side delay leading to a lag spike\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"cartServiceFailure\": {\n      \"description\": \"Fail cart service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceFailure\": {\n      \"description\": \"Fail payment service charge requests\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceUnreachable\": {\n      \"description\": \"Payment service is unavailable\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"loadgeneratorFloodHomepage\": {\n      \"description\": \"Flood the frontend with a large amount of requests.\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"imageSlowLoad\": {\n      \"description\": \"slow loading images in the frontend\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"10sec\": 10000,\n        \"5sec\": 5000,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"10sec\"\n    }\n  }\n}\n"}}' -H "Content-Type: application/strategic-merge-patch+json" -H "Authorization: bearer $TOKEN" "https://kubernetes.default/api/v1/namespaces/astroshop/configmaps/astroshop-flagd-config"
+  stop.sh: |
+    #!/bin/bash
+    apk --update add curl
+    TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+    curl -k -X PATCH --data '{"data":{"demo.flagd.json":"{\n  \"$schema\": \"https://flagd.dev/schema/v0/flags.json\",\n  \"flags\": {\n    \"productCatalogFailure\": {\n      \"description\": \"Fail product catalog service on a specific product\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"recommendationServiceCacheFailure\": {\n      \"description\": \"Fail recommendation service cache\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceManualGc\": {\n      \"description\": \"Triggers full manual garbage collections in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceHighCpu\": {\n      \"description\": \"Triggers high cpu load in the ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"adServiceFailure\": {\n      \"description\": \"Fail ad service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"kafkaQueueProblems\": {\n      \"description\": \"Overloads Kafka queue while simultaneously introducing a consumer side delay leading to a lag spike\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"cartServiceFailure\": {\n      \"description\": \"Fail cart service\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceFailure\": {\n      \"description\": \"Fail payment service charge requests\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"paymentServiceUnreachable\": {\n      \"description\": \"Payment service is unavailable\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": true,\n        \"off\": false\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"loadgeneratorFloodHomepage\": {\n      \"description\": \"Flood the frontend with a large amount of requests.\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"on\": 100,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    },\n    \"imageSlowLoad\": {\n      \"description\": \"slow loading images in the frontend\",\n      \"state\": \"ENABLED\",\n      \"variants\": {\n        \"10sec\": 10000,\n        \"5sec\": 5000,\n        \"off\": 0\n      },\n      \"defaultVariant\": \"off\"\n    }\n  }\n}\n"}}' -H "Content-Type: application/strategic-merge-patch+json" -H "Authorization: bearer $TOKEN" "https://kubernetes.default/api/v1/namespaces/astroshop/configmaps/astroshop-flagd-config"
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: productcatalog-trigger-failure-job-start
+spec:
+  schedule: "0 7 * * *"
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: astroshop-flagd-config-updater
+          restartPolicy: OnFailure
+          volumes:
+            - name: scripts
+              configMap:
+                name: astroshop-flagd-config-script
+          containers:
+          - name: execute
+            image: alpine:3.12
+            imagePullPolicy: IfNotPresent
+            command: [ "/bin/sh", "/tmp/scripts/start_product_catalog_failure.sh"]
+            volumeMounts:
+              - mountPath: "/tmp/scripts"
+                name: scripts
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: recommendationservice-trigger-cachefailure-job-start
+spec:
+  schedule: "0 8 * * *"
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: astroshop-flagd-config-updater
+          restartPolicy: OnFailure
+          volumes:
+            - name: scripts
+              configMap:
+                name: astroshop-flagd-config-script
+          containers:
+          - name: execute
+            image: alpine:3.12
+            imagePullPolicy: IfNotPresent
+            command: [ "/bin/sh", "/tmp/scripts/start_recommendation_service_cache_failure.sh"]
+            volumeMounts:
+              - mountPath: "/tmp/scripts"
+                name: scripts
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: adservice-trigger-manualgc-job-start
+spec:
+  schedule: "0 9 * * *"
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: astroshop-flagd-config-updater
+          restartPolicy: OnFailure
+          volumes:
+            - name: scripts
+              configMap:
+                name: astroshop-flagd-config-script
+          containers:
+          - name: execute
+            image: alpine:3.12
+            imagePullPolicy: IfNotPresent
+            command: [ "/bin/sh", "/tmp/scripts/start_adservice_manualgc.sh"]
+            volumeMounts:
+              - mountPath: "/tmp/scripts"
+                name: scripts
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: adservice-trigger-highcpu-job-start
+spec:
+  schedule: "0 10 * * *"
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: astroshop-flagd-config-updater
+          restartPolicy: OnFailure
+          volumes:
+            - name: scripts
+              configMap:
+                name: astroshop-flagd-config-script
+          containers:
+          - name: execute
+            image: alpine:3.12
+            imagePullPolicy: IfNotPresent
+            command: [ "/bin/sh", "/tmp/scripts/start_adservice_highcpu.sh"]
+            volumeMounts:
+              - mountPath: "/tmp/scripts"
+                name: scripts
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: adservice-trigger-failure-job-start
+spec:
+  schedule: "0 11 * * *"
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: astroshop-flagd-config-updater
+          restartPolicy: OnFailure
+          volumes:
+            - name: scripts
+              configMap:
+                name: astroshop-flagd-config-script
+          containers:
+          - name: execute
+            image: alpine:3.12
+            imagePullPolicy: IfNotPresent
+            command: [ "/bin/sh", "/tmp/scripts/start_adservice_failure.sh"]
+            volumeMounts:
+              - mountPath: "/tmp/scripts"
+                name: scripts
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: kafka-trigger-queue-problems-job-start
+spec:
+  schedule: "0 12 * * *"
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: astroshop-flagd-config-updater
+          restartPolicy: OnFailure
+          volumes:
+            - name: scripts
+              configMap:
+                name: astroshop-flagd-config-script
+          containers:
+          - name: execute
+            image: alpine:3.12
+            imagePullPolicy: IfNotPresent
+            command: [ "/bin/sh", "/tmp/scripts/start_kafka_queue_problems.sh"]
+            volumeMounts:
+              - mountPath: "/tmp/scripts"
+                name: scripts
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cartservice-trigger-failure-job-start
+spec:
+  schedule: "0 13 * * *"
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: astroshop-flagd-config-updater
+          restartPolicy: OnFailure
+          volumes:
+            - name: scripts
+              configMap:
+                name: astroshop-flagd-config-script
+          containers:
+          - name: execute
+            image: alpine:3.12
+            imagePullPolicy: IfNotPresent
+            command: [ "/bin/sh", "/tmp/scripts/start_cartservice_failure.sh"]
+            volumeMounts:
+              - mountPath: "/tmp/scripts"
+                name: scripts
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: paymentservice-trigger-unreachable-job-start
+spec:
+  schedule: "0 14 * * *"
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: astroshop-flagd-config-updater
+          restartPolicy: OnFailure
+          volumes:
+            - name: scripts
+              configMap:
+                name: astroshop-flagd-config-script
+          containers:
+          - name: execute
+            image: alpine:3.12
+            imagePullPolicy: IfNotPresent
+            command: [ "/bin/sh", "/tmp/scripts/start_payment_unreachable.sh"]
+            volumeMounts:
+              - mountPath: "/tmp/scripts"
+                name: scripts
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: loadgenerator-trigger-flood-job-start
+spec:
+  schedule: "0 15 * * *"
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: astroshop-flagd-config-updater
+          restartPolicy: OnFailure
+          volumes:
+            - name: scripts
+              configMap:
+                name: astroshop-flagd-config-script
+          containers:
+          - name: execute
+            image: alpine:3.12
+            imagePullPolicy: IfNotPresent
+            command: [ "/bin/sh", "/tmp/scripts/start_loadgenerator_flood.sh"]
+            volumeMounts:
+              - mountPath: "/tmp/scripts"
+                name: scripts
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: frontendproxy-trigger-image-slowload-job-start
+spec:
+  schedule: "0 16 * * *"
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: astroshop-flagd-config-updater
+          restartPolicy: OnFailure
+          volumes:
+            - name: scripts
+              configMap:
+                name: astroshop-flagd-config-script
+          containers:
+          - name: execute
+            image: alpine:3.12
+            imagePullPolicy: IfNotPresent
+            command: [ "/bin/sh", "/tmp/scripts/start_image_slowload.sh"]
+            volumeMounts:
+              - mountPath: "/tmp/scripts"
+                name: scripts
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: flagd-config-reset-job
+spec:
+  schedule: "*/30 * * * *"
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: astroshop-flagd-config-updater
+          restartPolicy: OnFailure
+          volumes:
+            - name: scripts
+              configMap:
+                name: astroshop-flagd-config-script
+          containers:
+          - name: execute
+            image: alpine:3.12
+            imagePullPolicy: IfNotPresent
+            command: [ "/bin/sh", "/tmp/scripts/stop.sh"]
+            volumeMounts:
+              - mountPath: "/tmp/scripts"
+                name: scripts
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: productadmin-update-product-job
+spec:
+  schedule: "*/5 * * * *"
+  suspend: false
+  jobTemplate:
+    spec:
+      suspend: false 
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: execute
+            image: alpine:3.12
+            imagePullPolicy: IfNotPresent
+            env:
+            - name: PRODUCT_ADMIN_USER
+              value: "product_admin"
+            - name: PRODUCT_ADMIN_PASSWORD
+              value: 'P@$$$$w0rd'
+            - name: PRODUCT_ADMIN_ENDPOINT_URI
+              value: "https://f22tqn1ew3.execute-api.us-east-1.amazonaws.com/Dev" 
+            command: 
+             - "/bin/sh"
+             - "-c"
+             - |
+                apk --update add curl bash coreutils;
+                /bin/bash <<'EOF'
+
+                echo starting;
+                AUTH=$(echo -ne "$PRODUCT_ADMIN_USER:$PRODUCT_ADMIN_PASSWORD" | base64 --wrap 0);
+                curl -k -X GET --header "Authorization: Basic $AUTH" "$PRODUCT_ADMIN_ENDPOINT_URI/product/OLJCESPC7Z";
+                curl -k -X PUT --header "Authorization: Basic $AUTH" --header "Content-Type: application/json" --data '{ "name": "Eclipsmart Travel Refractor Telescope 2026", "description": "Dedicated white-light solar scope for the observer on the go. The 50mm refracting solar scope uses Solar Safe, ISO compliant, full-aperture glass filter material to ensure the safest view of solar events.  The kit comes complete with everything you need, including the dedicated travel solar scope, a Solar Safe finderscope, tripod, a high quality 20mm (18x) Kellner eyepiece and a nylon backpack to carry everything in.  This Travel Solar Scope makes it easy to share the Sun as well as partial and total solar eclipses with the whole family and offers much higher magnifications than you would otherwise get using handheld solar viewers or binoculars.", "picture": "EclipsmartTravelRefractorTelescope.jpg", "priceUsd": {  "currencyCode": "USD",  "units": 129,  "nanos": 950000000 }, "categories": [  "telescopes",  "travel" ]}' "$PRODUCT_ADMIN_ENDPOINT_URI/product/OLJCESPC7Z";
+                echo done;
+
+                EOF
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: productadmin-list-products-job
+spec:
+  schedule: "*/1 * * * *"
+  suspend: true   # Original envoy proxy job is suspended as we moved to ingress-nginx
+  jobTemplate:
+    spec:
+      suspend: false 
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: execute
+            image: alpine:3.12
+            imagePullPolicy: IfNotPresent
+            env:
+            - name: PRODUCT_ADMIN_USER
+              value: "product_admin"
+            - name: PRODUCT_ADMIN_PASSWORD
+              value: 'P@$$$$w0rd'
+            - name: PRODUCT_ADMIN_ENDPOINT_URI
+              value: "https://f22tqn1ew3.execute-api.us-east-1.amazonaws.com/Dev" 
+            command: 
+             - "/bin/sh"
+             - "-c"
+             - |
+                apk --update add curl bash coreutils;
+                /bin/bash <<'EOF'
+
+                echo starting;
+                AUTH=$(echo -ne "$PRODUCT_ADMIN_USER:$PRODUCT_ADMIN_PASSWORD" | base64 --wrap 0);
+                curl -k -X GET --header "Authorization: Basic $AUTH" "$PRODUCT_ADMIN_ENDPOINT_URI/product";
+                echo done;
+
+                EOF

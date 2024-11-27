@@ -1,0 +1,15 @@
+{
+  "spanCaptureRule": {
+    "ruleName": "Astroshop-OTEL-OA-demo",
+    "ruleAction": "CAPTURE",
+    "matchers": [
+      {
+        "source": "ATTRIBUTE",
+        "sourceKey": "service.namespace",
+        "type": "EQUALS",
+        "value": "opentelemetry-demo",
+        "caseSensitive": false
+      }
+    ]
+  }
+}

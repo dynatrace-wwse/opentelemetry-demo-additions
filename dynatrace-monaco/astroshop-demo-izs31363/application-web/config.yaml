@@ -1,0 +1,8 @@
+configs:
+- id: APPLICATION-5FC9A852FF442457
+  config:
+    name: Astronomy Shop
+    template: APPLICATION-5FC9A852FF442457.json
+    skip: false
+  type:
+    api: application-web

@@ -1,0 +1,4 @@
+[submodule "cloud-native/dynatrace-aws-appobs-demo"]
+	path = cloud-native/dynatrace-aws-appobs-demo
+	url = https://bitbucket.lab.dynatrace.org/scm/cloude/opentelemetry-demo-additions.git
+	branch = dynatrace-instrumentation

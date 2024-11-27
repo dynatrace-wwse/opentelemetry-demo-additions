@@ -1,0 +1,34 @@
+FROM node:18  AS nodebuild
+
+# set the working dir to server folder
+WORKDIR /usr/src/app
+
+# Copy the productcatalogbackend code 
+COPY ./productcatalogbackend ./
+
+# install the nodejs dependencies & Build
+RUN npm install && \
+    npm run build
+
+FROM node:18-alpine
+ENV NODE_ENV=development
+
+ADD ./DynatraceOneAgentExtension/ /opt/
+RUN chmod +x /opt/dynatrace
+
+# set the working dir to server folder
+WORKDIR /usr/src/app
+
+# Copy the server code
+COPY --from=nodebuild /usr/src/app/package*.json ./
+COPY --from=nodebuild /usr/src/app/data  ./data
+COPY --from=nodebuild /usr/src/app/dist  ./dist
+
+# install the nodejs dependencies
+RUN npm install --omit=dev 
+
+# Expose the port
+EXPOSE 8080
+
+# Start the server
+CMD [ "node", "dist/Server.js"]

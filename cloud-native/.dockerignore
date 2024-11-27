@@ -1,0 +1,13 @@
+# .dockerignore
+.DS_Store
+Makefile
+Dockerfile*
+README*
+.env
+node_modules
+dist
+client/
+.vscode/
+.ci/
+Jenkinsfile
+template.yml

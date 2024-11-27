@@ -1,0 +1,21 @@
+configs:
+- id: 1f3b139e-0ca5-3d7b-b276-fc15aeb20a35
+  config:
+    template: 1f3b139e-0ca5-3d7b-b276-fc15aeb20a35.json
+    skip: false
+    originObjectId: vu9U3hXa3q0AAAABACBidWlsdGluOnNwYW4tY29udGV4dC1wcm9wYWdhdGlvbgAGdGVuYW50AAZ0ZW5hbnQAJGFhMDczN2JmLTRiMGYtMzZiYy04YjNiLWJhNDM0MGI2Y2M5Nr7vVN4V2t6t
+  type:
+    settings:
+      schema: builtin:span-context-propagation
+      schemaVersion: 0.1.18
+      scope: environment
+- id: 5f68c2e1-a254-34c8-9a3a-71014e6f3d0f
+  config:
+    template: 5f68c2e1-a254-34c8-9a3a-71014e6f3d0f.json
+    skip: false
+    originObjectId: vu9U3hXa3q0AAAABACBidWlsdGluOnNwYW4tY29udGV4dC1wcm9wYWdhdGlvbgAGdGVuYW50AAZ0ZW5hbnQAJGI2MWY3NWI5LTlhM2ItMzU4Yy1iNGFhLWMyODIwZDZiZGYwOL7vVN4V2t6t
+  type:
+    settings:
+      schema: builtin:span-context-propagation
+      schemaVersion: 0.1.18
+      scope: environment
