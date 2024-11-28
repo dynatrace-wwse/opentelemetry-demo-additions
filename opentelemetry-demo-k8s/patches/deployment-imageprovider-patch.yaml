@@ -9,7 +9,7 @@ spec:
     spec:
       containers:
         - name: imageprovider
-          image: geaksoteldemo.azurecr.io/oteldemo:1.11.1-imageprovider
+          image:ghcr.io/open-telemetry/demo:1.11.1-imageprovider
           imagePullPolicy: Always
           env:
             - name: OTEL_COLLECTOR_NAME

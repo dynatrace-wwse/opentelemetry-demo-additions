@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: accountingservice
-          image: geaksoteldemo.azurecr.io/oteldemo:1.11.1-accountingservice
+          image:ghcr.io/open-telemetry/demo:1.11.1-accountingservice
           imagePullPolicy: Always
           resources:
             limits:

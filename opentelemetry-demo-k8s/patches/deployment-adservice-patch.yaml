@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: adservice
-          image: geaksoteldemo.azurecr.io/oteldemo:1.11.1-adservice
+          image:ghcr.io/open-telemetry/demo:1.11.1-adservice
           imagePullPolicy: Always
           resources:
             limits:
