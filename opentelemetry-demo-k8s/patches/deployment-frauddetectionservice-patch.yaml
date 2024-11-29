@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: frauddetectionservice
-          image:shinojosa/astroshop:1.11.1-frauddetectionservice
+          image: shinojosa/astroshop:1.11.1-frauddetectionservice
           imagePullPolicy: Always
           env:
             - name: OTEL_COLLECTOR_NAME

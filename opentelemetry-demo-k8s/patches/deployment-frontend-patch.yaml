@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image:shinojosa/astroshop:1.11.1-frontend
+          image: shinojosa/astroshop:1.11.1-frontend
           imagePullPolicy: Always
           resources:
             limits:

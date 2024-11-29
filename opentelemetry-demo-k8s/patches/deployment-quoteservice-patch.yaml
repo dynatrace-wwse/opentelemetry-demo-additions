@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: quoteservice
-          image:shinojosa/astroshop:1.11.1-quoteservice
+          image: shinojosa/astroshop:1.11.1-quoteservice
           imagePullPolicy: Always
           env:
             - name: OTEL_COLLECTOR_NAME

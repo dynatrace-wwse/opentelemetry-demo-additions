@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: accountingservice
-          image:shinojosa/astroshop:1.11.1-accountingservice
+          image: shinojosa/astroshop:1.11.1-accountingservice
           imagePullPolicy: Always
           resources:
             limits:

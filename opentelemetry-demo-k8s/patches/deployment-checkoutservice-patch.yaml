@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: checkoutservice
-          image:shinojosa/astroshop:1.11.1-checkoutservice
+          image: shinojosa/astroshop:1.11.1-checkoutservice
           imagePullPolicy: Always
           env:
             - name: OTEL_COLLECTOR_NAME

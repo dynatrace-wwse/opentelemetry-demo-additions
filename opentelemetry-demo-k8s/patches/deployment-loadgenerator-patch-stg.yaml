@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: loadgenerator
-          image:shinojosa/astroshop:1.11.1-loadgenerator
+          image: shinojosa/astroshop:1.11.1-loadgenerator
           imagePullPolicy: Always
           env:
             - name: LOCUST_HOST
