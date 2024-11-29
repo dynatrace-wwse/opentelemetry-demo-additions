@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: adservice
-          image:ghcr.io/open-telemetry/demo:1.11.1-adservice
+          image:shinojosa/astroshop:1.11.1-adservice
           imagePullPolicy: Always
           resources:
             limits:

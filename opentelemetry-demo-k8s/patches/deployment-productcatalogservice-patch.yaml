@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: productcatalogservice
-          image:ghcr.io/open-telemetry/demo:1.11.1-productcatalogservice
+          image:shinojosa/astroshop:1.11.1-productcatalogservice
           imagePullPolicy: Always
           env:
             - name: OTEL_COLLECTOR_NAME
