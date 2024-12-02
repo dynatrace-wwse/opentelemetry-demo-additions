@@ -4,8 +4,8 @@ metadata:
   name: product-catalog-storage
 spec:
   accessModes:
-  - ReadWriteMany
-  storageClassName: azureblob-nfs-premium
+  - ReadWriteOnce
+  storageClassName: local-path
   resources:
     requests:
-      storage: 5Gi
+      storage: 1Gi
