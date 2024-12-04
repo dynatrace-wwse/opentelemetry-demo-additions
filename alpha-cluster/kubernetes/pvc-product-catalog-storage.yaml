@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    pv.kubernetes.io/bind-completed: "yes"
+    pv.kubernetes.io/bound-by-controller: "yes"
+  creationTimestamp: "2024-12-04T12:16:11Z"
+  finalizers:
+  - kubernetes.io/pvc-protection
+  name: product-catalog-storage
+  namespace: astroshop
+  resourceVersion: "2098"
+  uid: 5f14d172-24c4-4607-a2dd-12c50cdd1587
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: local-path
+  volumeMode: Filesystem
+  volumeName: product-catalog-storage
+status:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 1Gi
+  phase: Bound
