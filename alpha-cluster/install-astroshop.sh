@@ -48,6 +48,10 @@ kubectl apply -f otel_k8s_enrichment-staging.yaml
 kubectl apply -f otel_k8s_enrichment-production.yaml
 
 # Install OtelDemo!!
+# run Ansible on ACE BOX
+ace enable https://github.com/dynatrace-ace/perform-2025-hot-dynatrace-for-developers.git --local
+# Modify main.yaml to just run what we want
+# find otel
 
 # GET Kubectl  YAML files
 
