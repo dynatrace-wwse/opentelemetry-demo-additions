@@ -1,0 +1,841 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: adservice
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-adservice
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-adservice
+    name: astroshop-adservice
+    namespace: astroshop
+    resourceVersion: "1457"
+    uid: 8fb93d91-f827-41da-8fc1-c03341944f5a
+  spec:
+    clusterIP: 10.43.77.46
+    clusterIPs:
+    - 10.43.77.46
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-service
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      opentelemetry.io/name: astroshop-adservice
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: cartservice
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-cartservice
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-cartservice
+    name: astroshop-cartservice
+    namespace: astroshop
+    resourceVersion: "1489"
+    uid: 5156b31b-2a7f-4ed7-8514-94f9bc56573c
+  spec:
+    clusterIP: 10.43.209.45
+    clusterIPs:
+    - 10.43.209.45
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-service
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      opentelemetry.io/name: astroshop-cartservice
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: checkoutservice
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-checkoutservice
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-checkoutservice
+    name: astroshop-checkoutservice
+    namespace: astroshop
+    resourceVersion: "1521"
+    uid: d640f303-5477-4d1e-b610-5200b85ba662
+  spec:
+    clusterIP: 10.43.209.6
+    clusterIPs:
+    - 10.43.209.6
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-service
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      opentelemetry.io/name: astroshop-checkoutservice
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: currencyservice
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-currencyservice
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-currencyservice
+    name: astroshop-currencyservice
+    namespace: astroshop
+    resourceVersion: "1508"
+    uid: 53bc8df1-48d0-4d51-9e06-f90babcc5e99
+  spec:
+    clusterIP: 10.43.9.174
+    clusterIPs:
+    - 10.43.9.174
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-service
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      opentelemetry.io/name: astroshop-currencyservice
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: emailservice
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-emailservice
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-emailservice
+    name: astroshop-emailservice
+    namespace: astroshop
+    resourceVersion: "1484"
+    uid: 30bb6aeb-4f62-479a-b023-8c12381a801a
+  spec:
+    clusterIP: 10.43.129.72
+    clusterIPs:
+    - 10.43.129.72
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-service
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      opentelemetry.io/name: astroshop-emailservice
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: flagd
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-flagd
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-flagd
+    name: astroshop-flagd
+    namespace: astroshop
+    resourceVersion: "1495"
+    uid: 09511bf5-994c-4e76-83c2-e32be85dc88c
+  spec:
+    clusterIP: 10.43.14.50
+    clusterIPs:
+    - 10.43.14.50
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-service
+      port: 8013
+      protocol: TCP
+      targetPort: 8013
+    selector:
+      opentelemetry.io/name: astroshop-flagd
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: frontend
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-frontend
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-frontend
+    name: astroshop-frontend
+    namespace: astroshop
+    resourceVersion: "1498"
+    uid: 05f0d31e-6af1-4672-9a60-fe29cb1bd34e
+  spec:
+    clusterIP: 10.43.178.27
+    clusterIPs:
+    - 10.43.178.27
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-service
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      opentelemetry.io/name: astroshop-frontend
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+    labels:
+      app.kubernetes.io/component: frontendproxy
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-frontendproxy
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-frontendproxy
+    name: astroshop-frontendproxy
+    namespace: astroshop
+    resourceVersion: "1659"
+    uid: bb898860-00f2-440e-933f-045b65d7f3f7
+  spec:
+    allocateLoadBalancerNodePorts: true
+    clusterIP: 10.43.10.57
+    clusterIPs:
+    - 10.43.10.57
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-service
+      nodePort: 30795
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      opentelemetry.io/name: astroshop-frontendproxy
+    sessionAffinity: None
+    type: LoadBalancer
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 10.0.103.174
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: imageprovider
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-imageprovider
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-imageprovider
+    name: astroshop-imageprovider
+    namespace: astroshop
+    resourceVersion: "1459"
+    uid: 208b45fc-c31b-4331-9ce2-d94a832ef52f
+  spec:
+    clusterIP: 10.43.113.215
+    clusterIPs:
+    - 10.43.113.215
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-service
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+    selector:
+      opentelemetry.io/name: astroshop-imageprovider
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: kafka
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-kafka
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-kafka
+    name: astroshop-kafka
+    namespace: astroshop
+    resourceVersion: "1510"
+    uid: b3f0d2e3-82c6-4f98-bffc-b673cd23c184
+  spec:
+    clusterIP: 10.43.30.42
+    clusterIPs:
+    - 10.43.30.42
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: plaintext
+      port: 9092
+      protocol: TCP
+      targetPort: 9092
+    - name: controller
+      port: 9093
+      protocol: TCP
+      targetPort: 9093
+    selector:
+      opentelemetry.io/name: astroshop-kafka
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: loadgenerator
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-loadgenerator
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-loadgenerator
+    name: astroshop-loadgenerator
+    namespace: astroshop
+    resourceVersion: "1517"
+    uid: 070cc553-5690-4163-8db4-a32b790cd238
+  spec:
+    clusterIP: 10.43.119.25
+    clusterIPs:
+    - 10.43.119.25
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-service
+      port: 8089
+      protocol: TCP
+      targetPort: 8089
+    selector:
+      opentelemetry.io/name: astroshop-loadgenerator
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: paymentservice
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-paymentservice
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-paymentservice
+    name: astroshop-paymentservice
+    namespace: astroshop
+    resourceVersion: "1528"
+    uid: a71bb5a4-a7dc-42ee-94c7-2d30cc984a30
+  spec:
+    clusterIP: 10.43.102.215
+    clusterIPs:
+    - 10.43.102.215
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-service
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      opentelemetry.io/name: astroshop-paymentservice
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: productcatalogservice
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-productcatalogservice
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-productcatalogservice
+    name: astroshop-productcatalogservice
+    namespace: astroshop
+    resourceVersion: "1478"
+    uid: adf7b2a7-dfd1-4d16-a325-abcc09022966
+  spec:
+    clusterIP: 10.43.235.156
+    clusterIPs:
+    - 10.43.235.156
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-service
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      opentelemetry.io/name: astroshop-productcatalogservice
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: quoteservice
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-quoteservice
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-quoteservice
+    name: astroshop-quoteservice
+    namespace: astroshop
+    resourceVersion: "1468"
+    uid: c88863e2-f17c-4f7b-9d12-3e1b4877601f
+  spec:
+    clusterIP: 10.43.133.225
+    clusterIPs:
+    - 10.43.133.225
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-service
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      opentelemetry.io/name: astroshop-quoteservice
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: recommendationservice
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-recommendationservice
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-recommendationservice
+    name: astroshop-recommendationservice
+    namespace: astroshop
+    resourceVersion: "1473"
+    uid: 6cd4c4a4-b413-492a-af51-81712541f560
+  spec:
+    clusterIP: 10.43.105.177
+    clusterIPs:
+    - 10.43.105.177
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-service
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      opentelemetry.io/name: astroshop-recommendationservice
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: shippingservice
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-shippingservice
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-shippingservice
+    name: astroshop-shippingservice
+    namespace: astroshop
+    resourceVersion: "1479"
+    uid: f55cf9a2-ba11-488c-8f40-914f7aac4bb5
+  spec:
+    clusterIP: 10.43.133.180
+    clusterIPs:
+    - 10.43.133.180
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-service
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      opentelemetry.io/name: astroshop-shippingservice
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: astroshop
+      meta.helm.sh/release-namespace: astroshop
+    creationTimestamp: "2024-12-04T12:16:01Z"
+    labels:
+      app.kubernetes.io/component: valkey
+      app.kubernetes.io/instance: astroshop
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: astroshop-valkey
+      app.kubernetes.io/part-of: opentelemetry-demo
+      app.kubernetes.io/version: 1.11.1
+      helm.sh/chart: opentelemetry-demo-0.32.8
+      opentelemetry.io/name: astroshop-valkey
+    name: astroshop-valkey
+    namespace: astroshop
+    resourceVersion: "1463"
+    uid: b8862ab7-5ee1-4d3a-962e-a813e2831a88
+  spec:
+    clusterIP: 10.43.80.222
+    clusterIPs:
+    - 10.43.80.222
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: valkey
+      port: 6379
+      protocol: TCP
+      targetPort: 6379
+    selector:
+      opentelemetry.io/name: astroshop-valkey
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      metrics.dynatrace.com/port: "8888"
+      metrics.dynatrace.com/scrape: "true"
+      oneagent.dynatrace.com/inject: "false"
+    creationTimestamp: "2024-12-04T12:16:07Z"
+    labels:
+      app.kubernetes.io/component: opentelemetry-collector
+      app.kubernetes.io/instance: astroshop.dynatrace-otel-gateway
+      app.kubernetes.io/managed-by: opentelemetry-operator
+      app.kubernetes.io/name: dynatrace-otel-gateway-collector
+      app.kubernetes.io/part-of: opentelemetry
+      app.kubernetes.io/version: 0.108.0
+      operator.opentelemetry.io/collector-service-type: base
+    name: dynatrace-otel-gateway-collector
+    namespace: astroshop
+    ownerReferences:
+    - apiVersion: opentelemetry.io/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: OpenTelemetryCollector
+      name: dynatrace-otel-gateway
+      uid: 8e89f632-35ea-4f8c-bddb-35f5a71f5039
+    resourceVersion: "1829"
+    uid: e341036c-97d9-4fc9-9c9c-d71db16b46b4
+  spec:
+    clusterIP: 10.43.240.127
+    clusterIPs:
+    - 10.43.240.127
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - appProtocol: grpc
+      name: otlp-grpc
+      port: 4317
+      protocol: TCP
+      targetPort: 4317
+    - appProtocol: http
+      name: otlp-http
+      port: 4318
+      protocol: TCP
+      targetPort: 4318
+    selector:
+      app.kubernetes.io/component: opentelemetry-collector
+      app.kubernetes.io/instance: astroshop.dynatrace-otel-gateway
+      app.kubernetes.io/managed-by: opentelemetry-operator
+      app.kubernetes.io/part-of: opentelemetry
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      metrics.dynatrace.com/port: "8888"
+      metrics.dynatrace.com/scrape: "true"
+      oneagent.dynatrace.com/inject: "false"
+      service.beta.openshift.io/serving-cert-secret-name: dynatrace-otel-gateway-collector-headless-tls
+    creationTimestamp: "2024-12-04T12:16:07Z"
+    labels:
+      app.kubernetes.io/component: opentelemetry-collector
+      app.kubernetes.io/instance: astroshop.dynatrace-otel-gateway
+      app.kubernetes.io/managed-by: opentelemetry-operator
+      app.kubernetes.io/name: dynatrace-otel-gateway-collector
+      app.kubernetes.io/part-of: opentelemetry
+      app.kubernetes.io/version: 0.108.0
+      operator.opentelemetry.io/collector-headless-service: Exists
+      operator.opentelemetry.io/collector-service-type: headless
+    name: dynatrace-otel-gateway-collector-headless
+    namespace: astroshop
+    ownerReferences:
+    - apiVersion: opentelemetry.io/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: OpenTelemetryCollector
+      name: dynatrace-otel-gateway
+      uid: 8e89f632-35ea-4f8c-bddb-35f5a71f5039
+    resourceVersion: "1831"
+    uid: 2fe746ee-f352-4d39-96ce-81e74358e1b2
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - appProtocol: grpc
+      name: otlp-grpc
+      port: 4317
+      protocol: TCP
+      targetPort: 4317
+    - appProtocol: http
+      name: otlp-http
+      port: 4318
+      protocol: TCP
+      targetPort: 4318
+    selector:
+      app.kubernetes.io/component: opentelemetry-collector
+      app.kubernetes.io/instance: astroshop.dynatrace-otel-gateway
+      app.kubernetes.io/managed-by: opentelemetry-operator
+      app.kubernetes.io/part-of: opentelemetry
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      metrics.dynatrace.com/port: "8888"
+      metrics.dynatrace.com/scrape: "true"
+      oneagent.dynatrace.com/inject: "false"
+    creationTimestamp: "2024-12-04T12:16:07Z"
+    labels:
+      app.kubernetes.io/component: opentelemetry-collector
+      app.kubernetes.io/instance: astroshop.dynatrace-otel-gateway
+      app.kubernetes.io/managed-by: opentelemetry-operator
+      app.kubernetes.io/name: dynatrace-otel-gateway-collector-monitoring
+      app.kubernetes.io/part-of: opentelemetry
+      app.kubernetes.io/version: 0.108.0
+      operator.opentelemetry.io/collector-monitoring-service: Exists
+      operator.opentelemetry.io/collector-service-type: monitoring
+    name: dynatrace-otel-gateway-collector-monitoring
+    namespace: astroshop
+    ownerReferences:
+    - apiVersion: opentelemetry.io/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: OpenTelemetryCollector
+      name: dynatrace-otel-gateway
+      uid: 8e89f632-35ea-4f8c-bddb-35f5a71f5039
+    resourceVersion: "1842"
+    uid: 0a45e45d-80c0-4014-bb38-ea5732099de5
+  spec:
+    clusterIP: 10.43.79.118
+    clusterIPs:
+    - 10.43.79.118
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: monitoring
+      port: 8888
+      protocol: TCP
+      targetPort: 8888
+    selector:
+      app.kubernetes.io/component: opentelemetry-collector
+      app.kubernetes.io/instance: astroshop.dynatrace-otel-gateway
+      app.kubernetes.io/managed-by: opentelemetry-operator
+      app.kubernetes.io/part-of: opentelemetry
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""
