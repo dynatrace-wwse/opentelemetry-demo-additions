@@ -11,7 +11,7 @@
           </elementProp>
           <elementProp name="SERVER_URL" elementType="Argument">
             <stringProp name="Argument.name">SERVER_URL</stringProp>
-            <stringProp name="Argument.value">${__P(SERVER_URL,astroshop.fb1c1f7c-76a3-4d1f-9958-0cf9035430f1.dynatrace.training)}</stringProp>
+            <stringProp name="Argument.value">${__P(SERVER_URL,astro.whydevslovedynatrace.com)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="VUCount" elementType="Argument">
@@ -65,7 +65,7 @@
           <stringProp name="HTTPSampler.implementation"></stringProp>
         </ConfigTestElement>
         <hashTree/>
-        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager">
           <collectionProp name="CookieManager.cookies"/>
           <boolProp name="CookieManager.clearEachIteration">false</boolProp>
           <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
@@ -152,7 +152,7 @@ vars.put(&quot;key&quot;, keys[k]);
           <stringProp name="scriptLanguage">groovy</stringProp>
         </JSR223PreProcessor>
         <hashTree/>
-        <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="dynatrace Tagging">
+        <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="dynatrace Tagging" enabled="true">
           <boolProp name="resetInterpreter">false</boolProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
@@ -216,7 +216,7 @@ sampler.getHeaderManager().add(new org.apache.jmeter.protocol.http.control.Heade
           <stringProp name="TestPlan.comments">this will run for every sampler</stringProp>
         </BeanShellPreProcessor>
         <hashTree/>
-        <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="Transaction UUID">
+        <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="Transaction UUID" enabled="true">
           <collectionProp name="UserParameters.names">
             <stringProp name="607796817">sessionId</stringProp>
           </collectionProp>
@@ -229,13 +229,13 @@ sampler.getHeaderManager().add(new org.apache.jmeter.protocol.http.control.Heade
           <stringProp name="TestPlan.comments">PreProcessor</stringProp>
         </UserParameters>
         <hashTree/>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler">
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
           <boolProp name="displayJMeterProperties">true</boolProp>
           <boolProp name="displayJMeterVariables">true</boolProp>
           <boolProp name="displaySystemProperties">false</boolProp>
         </DebugSampler>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="1 - homepage">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="1 - homepage" enabled="true">
           <intProp name="HTTPSampler.concurrentPool">6</intProp>
           <stringProp name="HTTPSampler.domain">${SERVER_URL}</stringProp>
           <stringProp name="HTTPSampler.protocol">${scheme}</stringProp>
@@ -275,7 +275,7 @@ print(&quot;sessionId: &quot; + vars.get(&quot;sessionId&quot;));</stringProp>
           </ConstantTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="2 - get products">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="2 - get products" enabled="true">
           <intProp name="HTTPSampler.concurrentPool">6</intProp>
           <stringProp name="HTTPSampler.domain">${SERVER_URL}</stringProp>
           <stringProp name="HTTPSampler.protocol">${scheme}</stringProp>
@@ -314,7 +314,7 @@ print(&quot;sessionId: &quot; + vars.get(&quot;sessionId&quot;));</stringProp>
           </ConstantTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="3 - get currencies">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="3 - get currencies" enabled="true">
           <intProp name="HTTPSampler.concurrentPool">6</intProp>
           <stringProp name="HTTPSampler.domain">${SERVER_URL}</stringProp>
           <stringProp name="HTTPSampler.protocol">${scheme}</stringProp>
@@ -353,7 +353,7 @@ print(&quot;sessionId: &quot; + vars.get(&quot;sessionId&quot;));</stringProp>
           </ConstantTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="4 - ad service ">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="4 - ad service " enabled="true">
           <intProp name="HTTPSampler.concurrentPool">6</intProp>
           <stringProp name="HTTPSampler.domain">${SERVER_URL}</stringProp>
           <stringProp name="HTTPSampler.protocol">${scheme}</stringProp>
@@ -437,7 +437,7 @@ print(&quot;sessionId: &quot; + vars.get(&quot;sessionId&quot;));</stringProp>
           </ResultCollector>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="5 - add product A">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="5 - add product A" enabled="true">
           <intProp name="HTTPSampler.concurrentPool">6</intProp>
           <stringProp name="HTTPSampler.domain">${SERVER_URL}</stringProp>
           <stringProp name="HTTPSampler.protocol">${scheme}</stringProp>
@@ -462,7 +462,7 @@ print(&quot;sessionId: &quot; + vars.get(&quot;sessionId&quot;));</stringProp>
           </ConstantTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="6 - get recommendations">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="6 - get recommendations" enabled="true">
           <intProp name="HTTPSampler.concurrentPool">6</intProp>
           <stringProp name="HTTPSampler.domain">${SERVER_URL}</stringProp>
           <stringProp name="HTTPSampler.protocol">${scheme}</stringProp>
@@ -504,7 +504,7 @@ print(&quot;sessionId: &quot; + vars.get(&quot;sessionId&quot;));</stringProp>
           </ConstantTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="7 - get cart in B">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="7 - get cart in B" enabled="true">
           <intProp name="HTTPSampler.concurrentPool">6</intProp>
           <stringProp name="HTTPSampler.domain">${SERVER_URL}</stringProp>
           <stringProp name="HTTPSampler.protocol">${scheme}</stringProp>
@@ -539,7 +539,7 @@ print(&quot;sessionId: &quot; + vars.get(&quot;sessionId&quot;));</stringProp>
           </ConstantTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="8 - empty cart">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="8 - empty cart" enabled="true">
           <intProp name="HTTPSampler.concurrentPool">6</intProp>
           <stringProp name="HTTPSampler.domain">${SERVER_URL}</stringProp>
           <stringProp name="HTTPSampler.protocol">${scheme}</stringProp>
@@ -565,7 +565,7 @@ print(&quot;sessionId: &quot; + vars.get(&quot;sessionId&quot;));</stringProp>
           </ConstantTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="9 - add product B">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="9 - add product B" enabled="true">
           <intProp name="HTTPSampler.concurrentPool">6</intProp>
           <stringProp name="HTTPSampler.domain">${SERVER_URL}</stringProp>
           <stringProp name="HTTPSampler.protocol">${scheme}</stringProp>
@@ -590,7 +590,7 @@ print(&quot;sessionId: &quot; + vars.get(&quot;sessionId&quot;));</stringProp>
           </ConstantTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="10 - get cart in A">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="10 - get cart in A" enabled="true">
           <intProp name="HTTPSampler.concurrentPool">6</intProp>
           <stringProp name="HTTPSampler.domain">${SERVER_URL}</stringProp>
           <stringProp name="HTTPSampler.protocol">${scheme}</stringProp>
@@ -625,7 +625,7 @@ print(&quot;sessionId: &quot; + vars.get(&quot;sessionId&quot;));</stringProp>
           </ConstantTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="11 - checkout">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="11 - checkout" enabled="true">
           <intProp name="HTTPSampler.concurrentPool">6</intProp>
           <stringProp name="HTTPSampler.domain">${SERVER_URL}</stringProp>
           <stringProp name="HTTPSampler.protocol">${scheme}</stringProp>
@@ -651,7 +651,7 @@ print(&quot;sessionId: &quot; + vars.get(&quot;sessionId&quot;));</stringProp>
           </ConstantTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="12 - get empty cart">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="12 - get empty cart" enabled="true">
           <intProp name="HTTPSampler.concurrentPool">6</intProp>
           <stringProp name="HTTPSampler.domain">${SERVER_URL}</stringProp>
           <stringProp name="HTTPSampler.protocol">${scheme}</stringProp>
@@ -790,7 +790,7 @@ print(&quot;sessionId: &quot; + vars.get(&quot;sessionId&quot;));</stringProp>
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
-      <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph">
+      <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
