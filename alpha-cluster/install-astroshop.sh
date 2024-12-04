@@ -56,6 +56,14 @@ ace enable https://github.com/dynatrace-ace/perform-2025-hot-dynatrace-for-devel
 # GET Kubectl  YAML files
 # TODO: In here
 
+# For gcloud PVC
+# ALpha is in us-central1-c
+gcloud compute disks create example-disk --size=10Gi --zone=us-central1-c
+# example-disk  us-central1-c  10       pd-standard  READY
+# ssh and mount disk
+gcloud compute ssh --zone "us-central1-a" "hot-diagnostics-alpha-remote-agent-azdo" --project "sales-engineering-emea"
+
+
 
 
 

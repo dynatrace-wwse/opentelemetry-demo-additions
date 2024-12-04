@@ -3,14 +3,11 @@ kind: PersistentVolume
 metadata:
   annotations:
     pv.kubernetes.io/bound-by-controller: "yes"
-  creationTimestamp: "2024-12-04T12:16:10Z"
   finalizers:
   - kubernetes.io/pv-protection
   labels:
     type: local
   name: product-catalog-storage
-  resourceVersion: "2094"
-  uid: 8438d8e3-5da0-42cf-9a6e-7f2fa0d5c885
 spec:
   accessModes:
   - ReadWriteOnce
@@ -21,14 +18,9 @@ spec:
     kind: PersistentVolumeClaim
     name: product-catalog-storage
     namespace: astroshop
-    resourceVersion: "1897"
-    uid: 5f14d172-24c4-4607-a2dd-12c50cdd1587
   hostPath:
     path: /products
     type: ""
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-path
   volumeMode: Filesystem
-status:
-  lastPhaseTransitionTime: "2024-12-04T12:16:16Z"
-  phase: Bound
