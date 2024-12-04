@@ -4,19 +4,13 @@ items:
   kind: Deployment
   metadata:
     annotations:
-      meta.helm.sh/release-name: astroshop
-      meta.helm.sh/release-namespace: astroshop
     labels:
-      app.kubernetes.io/component: accountingservice
-      app.kubernetes.io/instance: astroshop
-      app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: astroshop-accountingservice
-      app.kubernetes.io/part-of: opentelemetry-demo
       app.kubernetes.io/version: 1.11.1
       dt.owner: dev-team-microservices
       opentelemetry.io/name: astroshop-accountingservice
     name: astroshop-accountingservice
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -35,7 +29,6 @@ items:
           dynatrace.com/inject: "true"
           metadata.dynatrace.com/process.technology: .NET
           oneagent.dynatrace.com/inject: "true"
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: accountingservice
           app.kubernetes.io/instance: astroshop
@@ -86,7 +79,7 @@ items:
             value: astroshop-kafka:9092
           - name: OTEL_EXPORTER_OTLP_ENDPOINT
             value: http://$(OTEL_COLLECTOR_NAME):4317
-          image: 10.43.113.231:5000/astroshop-accountingservice:v1.0.0-fe68c098
+          image: shinojosa/astroshop:1.11.1-accountingservice
           imagePullPolicy: Always
           name: accountingservice
           resources:
@@ -117,22 +110,14 @@ items:
   kind: Deployment
   metadata:
     annotations:
-      meta.helm.sh/release-name: astroshop
-      meta.helm.sh/release-namespace: astroshop
     labels:
-      app.kubernetes.io/component: adservice
-      app.kubernetes.io/instance: astroshop
-      app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: astroshop-adservice
       app.kubernetes.io/part-of: opentelemetry-demo
       app.kubernetes.io/version: 1.11.1
       dt.owner: dev-team-microservices
-      helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-adservice
     name: astroshop-adservice
-    namespace: astroshop
-    resourceVersion: "5153"
-    uid: e0aaaeea-9756-4855-9ec3-3d95e5f85322
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -150,7 +135,6 @@ items:
         annotations:
           metadata.dynatrace.com/process.technology: Java
           oneagent.dynatrace.com/inject: "true"
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: adservice
           app.kubernetes.io/instance: astroshop
@@ -198,7 +182,7 @@ items:
             value: none
           - name: OTEL_METRICS_EXPORTER
             value: console,otlp
-          image: 10.43.113.231:5000/astroshop-adservice:v1.0.0-0751903d
+          image: shinojosa/astroshop:1.11.1-adservice
           imagePullPolicy: Always
           name: adservice
           ports:
@@ -235,7 +219,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-cartservice
     name: astroshop-cartservice
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -307,7 +291,7 @@ items:
             value: "8013"
           - name: OTEL_EXPORTER_OTLP_ENDPOINT
             value: http://$(OTEL_COLLECTOR_NAME):4317
-          image: 10.43.113.231:5000/astroshop-carts:v1.0.0-2507e1da
+          image: shinojosa/astroshop:1.11.1-cartservice
           imagePullPolicy: Always
           name: cartservice
           ports:
@@ -355,7 +339,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-checkoutservice
     name: astroshop-checkoutservice
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -373,7 +357,6 @@ items:
         annotations:
           metadata.dynatrace.com/process.technology: go
           oneagent.dynatrace.com/inject: "false"
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: checkoutservice
           app.kubernetes.io/instance: astroshop
@@ -458,7 +441,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-currencyservice
     name: astroshop-currencyservice
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -476,7 +459,6 @@ items:
         annotations:
           metadata.dynatrace.com/process.technology: cpp
           oneagent.dynatrace.com/inject: "false"
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: currencyservice
           app.kubernetes.io/instance: astroshop
@@ -533,7 +515,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-emailservice
     name: astroshop-emailservice
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -551,7 +533,6 @@ items:
         annotations:
           metadata.dynatrace.com/process.technology: ruby
           oneagent.dynatrace.com/inject: "false"
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: emailservice
           app.kubernetes.io/instance: astroshop
@@ -608,7 +589,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-flagd
     name: astroshop-flagd
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -626,7 +607,6 @@ items:
         annotations:
           metadata.dynatrace.com/process.technology: flagd
           oneagent.dynatrace.com/inject: "false"
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: flagd
           app.kubernetes.io/instance: astroshop
@@ -685,8 +665,6 @@ items:
       deployment.kubernetes.io/revision: "2"
       meta.helm.sh/release-name: astroshop
       meta.helm.sh/release-namespace: astroshop
-    creationTimestamp: "2024-12-04T12:16:01Z"
-    generation: 2
     labels:
       app.kubernetes.io/component: frauddetectionservice
       app.kubernetes.io/instance: astroshop
@@ -697,7 +675,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-frauddetectionservice
     name: astroshop-frauddetectionservice
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -784,7 +762,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-frontend
     name: astroshop-frontend
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -803,7 +781,6 @@ items:
           dt.owner: dev-team-ux
           metadata.dynatrace.com/process.technology: nodejs
           oneagent.dynatrace.com/inject: "true"
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: frontend
           app.kubernetes.io/instance: astroshop
@@ -867,7 +844,7 @@ items:
           - name: PUBLIC_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
           - name: NEXT_OTEL_VERBOSE
             value: "0"
-          image: 10.43.113.231:5000/astroshop-frontend:1.0.0-2b984279
+          image: shinojosa/astroshop:1.11.1-frontend
           imagePullPolicy: Always
           name: frontend
           ports:
@@ -897,7 +874,6 @@ items:
       deployment.kubernetes.io/revision: "1"
       meta.helm.sh/release-name: astroshop
       meta.helm.sh/release-namespace: astroshop
-    creationTimestamp: "2024-12-04T12:16:01Z"
     generation: 1
     labels:
       app.kubernetes.io/component: frontendproxy
@@ -909,7 +885,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-frontendproxy
     name: astroshop-frontendproxy
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -926,7 +902,6 @@ items:
       metadata:
         annotations:
           dt.owner: dev-team-ux
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: frontendproxy
           app.kubernetes.io/instance: astroshop
@@ -1013,7 +988,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-imageprovider
     name: astroshop-imageprovider
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -1033,7 +1008,6 @@ items:
           metrics.dynatrace.com/port: "9113"
           metrics.dynatrace.com/scrape: "true"
           oneagent.dynatrace.com/inject: "false"
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: imageprovider
           app.kubernetes.io/instance: astroshop
@@ -1101,7 +1075,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-kafka
     name: astroshop-kafka
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -1189,7 +1163,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-loadgenerator
     name: astroshop-loadgenerator
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -1204,7 +1178,6 @@ items:
       type: RollingUpdate
     template:
       metadata:
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: loadgenerator
           app.kubernetes.io/instance: astroshop
@@ -1277,7 +1250,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-paymentservice
     name: astroshop-paymentservice
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -1295,7 +1268,6 @@ items:
         annotations:
           metadata.dynatrace.com/process.technology: nodejs
           oneagent.dynatrace.com/inject: "true"
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: paymentservice
           app.kubernetes.io/instance: astroshop
@@ -1343,7 +1315,7 @@ items:
             value: "8013"
           - name: OTEL_EXPORTER_OTLP_ENDPOINT
             value: http://$(OTEL_COLLECTOR_NAME):4317
-          image: 10.43.113.231:5000/astroshop-paymentservice:v1.0.0-03d9ccca
+          image: shinojosa/astroshop:1.11.1-paymentservice
           imagePullPolicy: Always
           name: paymentservice
           ports:
@@ -1382,7 +1354,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-productcatalogservice
     name: astroshop-productcatalogservice
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -1400,7 +1372,6 @@ items:
         annotations:
           metadata.dynatrace.com/process.technology: go
           oneagent.dynatrace.com/inject: "false"
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: productcatalogservice
           app.kubernetes.io/instance: astroshop
@@ -1459,8 +1430,6 @@ items:
       deployment.kubernetes.io/revision: "2"
       meta.helm.sh/release-name: astroshop
       meta.helm.sh/release-namespace: astroshop
-    creationTimestamp: "2024-12-04T12:16:01Z"
-    generation: 2
     labels:
       app.kubernetes.io/component: quoteservice
       app.kubernetes.io/instance: astroshop
@@ -1471,7 +1440,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-quoteservice
     name: astroshop-quoteservice
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -1489,7 +1458,6 @@ items:
         annotations:
           metadata.dynatrace.com/process.technology: PHP
           oneagent.dynatrace.com/inject: "false"
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: quoteservice
           app.kubernetes.io/instance: astroshop
@@ -1551,7 +1519,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-recommendationservice
     name: astroshop-recommendationservice
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -1569,7 +1537,6 @@ items:
         annotations:
           metadata.dynatrace.com/process.technology: python
           oneagent.dynatrace.com/inject: "false"
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: recommendationservice
           app.kubernetes.io/instance: astroshop
@@ -1634,7 +1601,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-shippingservice
     name: astroshop-shippingservice
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -1652,7 +1619,6 @@ items:
         annotations:
           metadata.dynatrace.com/process.technology: rust
           oneagent.dynatrace.com/inject: "false"
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: shippingservice
           app.kubernetes.io/instance: astroshop
@@ -1709,7 +1675,7 @@ items:
       helm.sh/chart: opentelemetry-demo-0.32.8
       opentelemetry.io/name: astroshop-valkey
     name: astroshop-valkey
-    namespace: astroshop
+    namespace: staging-astroshop
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -1724,7 +1690,6 @@ items:
       type: RollingUpdate
     template:
       metadata:
-        creationTimestamp: null
         labels:
           app.kubernetes.io/component: valkey
           app.kubernetes.io/instance: astroshop
