@@ -220,21 +220,19 @@ items:
     namespace: staging-astroshop
   spec:
     allocateLoadBalancerNodePorts: true
-    externalTrafficPolicy: Cluster
     internalTrafficPolicy: Cluster
     ipFamilies:
     - IPv4
     ipFamilyPolicy: SingleStack
     ports:
     - name: tcp-service
-      nodePort: 30795
       port: 8080
       protocol: TCP
       targetPort: 8080
     selector:
       opentelemetry.io/name: astroshop-frontendproxy
     sessionAffinity: None
-    type: LoadBalancer
+    type: ClusterIP
   status:
     loadBalancer:
       ingress:
